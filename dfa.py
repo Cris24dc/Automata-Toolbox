@@ -73,6 +73,3 @@ def dfa_emulator():
         print("String accepted")
     else:
         print("String rejected")
-
-
-dfa_emulator()
