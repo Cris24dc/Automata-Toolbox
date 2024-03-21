@@ -20,7 +20,7 @@ def get_section_list(content):
         if token.strip().startswith("[") and token.strip().endswith("]"):
             array.append(token.strip().strip("[]"))
         elif "[" in token or "]" in token:
-            raise ValueError(f"Invalid section name '{token}'")
+            raise ValueError(f"Invalid section syntax '{token}'")
     return array
 
 
