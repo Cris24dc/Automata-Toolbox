@@ -1,15 +1,10 @@
 import sections_parser
+import os
 
 
 def dfa_check():
 
-    while True:
-        file_name = input("Please enter a valid filename: ")
-        try:
-            with open(f"./cfg/{file_name}.cfg", 'r') as file:
-                break
-        except FileNotFoundError:
-            print("Error: File not found. Please try again.")
+    file_name = input("Please enter a valid filename: ")
 
     content = sections_parser.load_file_content(file_name)
 
