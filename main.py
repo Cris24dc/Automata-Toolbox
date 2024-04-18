@@ -7,13 +7,15 @@ def main():
         if choice == "1":
             interface.generate_template()
         elif choice == "2":
-            interface.emulate_dfa()
-        elif choice == "3":
             interface.configure_file()
-        elif choice == '4':
+        elif choice == '3':
             interface.list_config_files()
-        elif choice == '5':
+        elif choice == '4':
             interface.delete_config_file()
+        elif choice == '5':
+            interface.emulate_dfa()
+        elif choice == '6':
+            interface.emulate_cfg()
         elif choice.lower() == "q":
             interface.clear_screen()
             break

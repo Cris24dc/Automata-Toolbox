@@ -1,6 +1,4 @@
 import sections_parser
-import os
-
 
 def dfa_check():
 

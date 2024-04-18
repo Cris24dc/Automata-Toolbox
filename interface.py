@@ -1,7 +1,8 @@
 import os
 import subprocess
-import template
+import templates
 import dfa
+import cfg
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -10,22 +11,38 @@ def main_menu():
     clear_screen()
     print("Main Menu:\n")
     print("1. Generate a Template")
-    print("2. Emulate a DFA")
-    print("3. Edit Config File")
-    print("4. List Config Files")
-    print("5. Delete Config File")
+    print("2. Edit Config File")
+    print("3. List Config Files")
+    print("4. Delete Config File")
+    print("5. Emulate a DFA")
+    print("6. Emulate a CFG")
     print("q. Exit\n")
 
 def generate_template():
     clear_screen()
-    print("Generate a Template")
-    template.template_generator()
-    input("Press Enter to return to the main menu.")
+    print("Generate a Template:\n")
+    print("1. DFA Template")
+    print("2. CFG Template")
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        templates.dfa_template_generator()
+        input("Press Enter to return to the main menu.")
+    elif choice == "2":
+        templates.cfg_template_generator()
+        input("Press Enter to return to the main menu.")
+    else:
+        print("Invalid option. Please try again.")
 
 def emulate_dfa():
     clear_screen()
     print("Emulate a DFA")
     dfa.dfa_emulator()
+    input("Press Enter to return to the main menu.")
+
+def emulate_cfg():
+    clear_screen()
+    print("Emulate a CFG")
+    cfg.cfg_emulator()
     input("Press Enter to return to the main menu.")
 
 def configure_file():
