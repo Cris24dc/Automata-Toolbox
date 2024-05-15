@@ -21,7 +21,6 @@ def main():
             break
         else:
             interface.clear_screen()
-            print("Invalid option. Please try again.")
 
 if __name__ == "__main__":
     main()

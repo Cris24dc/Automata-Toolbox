@@ -1,9 +1,12 @@
 import sections_parser
 import random
 
-def cfg_check(file_name):
+def cfg_check():
 
-    content = sections_parser.get_file_content(file_name)
+    file_name = input("Enter the name of the config file: ")
+
+    content = sections_parser.load_file_content(file_name)
+
     if content == None:
         return None
     
@@ -64,14 +67,26 @@ def cfg_emulator():
     variables, terminals, rules = result
 
     string = random.choice(variables)
-    print(string)
-    while not all([char in terminals for char in string]):
-        for rule in rules:
-            if rule.split("->")[0].strip() == string[0]:
-                string = rule.split("->")[1].strip() + string[1:]
-                break
+    
+    while True:
+        new_string = ""
+        for element in string.split():
+            if element in terminals:
+                new_string += element + " "
+            else:
+                found = False
+                for rule in rules:
+                    if rule.split("->")[0].strip() == element:
+                        new_string += rule.split("->")[1].strip() + " "
+                        found = True
+                        break
+                if not found:
+                    new_string += element + " "
+        if new_string == string:
+            break
+        string = new_string.strip()
         print(string)
-    print("End of string")
+
 
     
 

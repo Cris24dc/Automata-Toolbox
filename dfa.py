@@ -72,7 +72,7 @@ def dfa_emulator():
     current_state = start[0]
     for char in string:
         if char not in sigma:
-            print("Invalid string")
+            print("The string contains characters not present in the alphabet")
             return
         
         for transition in delta:
