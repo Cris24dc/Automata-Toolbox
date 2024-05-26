@@ -15,7 +15,11 @@ def main():
         elif choice == '5':
             interface.emulate_dfa()
         elif choice == '6':
+            interface.emulate_nfa()
+        elif choice == '7':
             interface.emulate_cfg()
+        elif choice == '8':
+            interface.emulate_pda()
         elif choice.lower() == "q":
             interface.clear_screen()
             break

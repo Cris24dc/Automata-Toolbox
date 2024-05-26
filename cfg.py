@@ -37,7 +37,7 @@ def cfg_check():
         elif section_name == "Rules":
             for line in section_content:
                 if len(line.split()) < 3:
-                    print(f"Line '{line}' in section 'Rules' has less than three elements")
+                    print(f"Line '{line}' in section 'Rules' has less than three elements: variable, '->', rule")
                     return
                 if "->" not in line:
                     print(f"Line '{line}' in section 'Rules' does not have '->'")
@@ -47,51 +47,40 @@ def cfg_check():
                 if variable not in variables:
                     print(f"Variable '{variable}' not found in 'Variables' section")
                     return
-                for element in rule.split():
-                    if element not in variables and element not in terminals:
+                
+                for element in rule.split("->")[0].strip():
+                    if element not in variables and element not in terminals and element != "$":
                         print(f"Element '{element}' not found in 'Variables' or 'Terminals' section")
                         return
 
     print(f"CFG from \"{file_name}\" is valid")
-
     return variables, terminals, rules
 
-# context free grammar emulator
-# it s generating and printing random strings until there are just terminals in the string, based on the rules, choosing the rules randomly
-def cfg_emulator():
+
+def cfg_generator():
     
     result = cfg_check()
     if result is None:
         return
     
     variables, terminals, rules = result
+    starting_variable = variables[0]
+    rules_dict = {}
+    for rule in rules:
+        variable, rule = rule.split("->")
+        variable = variable.strip()
+        rule = rule.strip()
+        if variable not in rules_dict:
+            rules_dict[variable] = []
+        rules_dict[variable].append(rule)
 
-    string = random.choice(variables)
-    
-    while True:
-        new_string = ""
-        for element in string.split():
-            if element in terminals:
-                new_string += element + " "
-            else:
-                found = False
-                for rule in rules:
-                    if rule.split("->")[0].strip() == element:
-                        new_string += rule.split("->")[1].strip() + " "
-                        found = True
-                        break
-                if not found:
-                    new_string += element + " "
-        if new_string == string:
-            break
-        string = new_string.strip()
-        print(string)
+    result = starting_variable
 
-
-    
-
-    
-
+    while any([variable in result for variable in variables]):
+        for variable in variables:
+            if variable in result:
+                rule = random.choice(rules_dict[variable])
+                result = result.replace(variable, rule, 1)
+                break
         
-
-
+    print(result.replace("$", ""))
