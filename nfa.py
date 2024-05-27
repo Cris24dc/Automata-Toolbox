@@ -1,12 +1,11 @@
 import sections_parser
 
 def nfa_check():
-
     file_name = input("Please enter a valid filename: ")
 
     content = sections_parser.load_file_content(file_name)
 
-    if content == None:
+    if content is None:
         return None
     
     sections = sections_parser.get_section_list(content)
@@ -47,7 +46,7 @@ def nfa_check():
                 if state_from not in states:
                     print(f"State '{state_from}' not found in 'States' section")
                     return
-                if char not in sigma:
+                if char not in sigma and char != '$':
                     print(f"Character '{char}' not found in 'Sigma' section")
                     return
                 if state_to not in states:
@@ -59,9 +58,8 @@ def nfa_check():
     return sigma, states, start, final, delta
 
 def nfa_emulator():
-    
     result = nfa_check()
-    if result == None:
+    if result is None:
         return
     
     sigma, states, start, final, delta = result
@@ -69,29 +67,45 @@ def nfa_emulator():
     string = input("Please enter a string: ")
 
     def parse_delta(delta):
-            transitions = {}
-            for line in delta:
-                state_from, char, state_to = line.split()
-                if (state_from, char) not in transitions:
-                    transitions[(state_from, char)] = []
-                transitions[(state_from, char)].append(state_to)
-            return transitions
+        transitions = {}
+        for line in delta:
+            parts = line.split()
+            state_from, char, state_to = parts[0], parts[1], parts[2]
+            if (state_from, char) not in transitions:
+                transitions[(state_from, char)] = []
+            transitions[(state_from, char)].append(state_to)
+        return transitions
+
+    def epsilon_closure(states, transitions):
+        closure = set(states)
+        stack = list(states)
+        
+        while stack:
+            state = stack.pop()
+            if (state, '$') in transitions:
+                epsilon_states = transitions[(state, '$')]
+                for epsilon_state in epsilon_states:
+                    if epsilon_state not in closure:
+                        closure.add(epsilon_state)
+                        stack.append(epsilon_state)
+        
+        return closure
 
     transitions = parse_delta(delta)
-    
+
     def process_nfa(start, final, transitions, string):
-        current_states = set(start)
+        current_states = epsilon_closure(set(start), transitions)
         
         for char in string:
             next_states = set()
             for state in current_states:
                 if (state, char) in transitions:
                     next_states.update(transitions[(state, char)])
-            current_states = next_states
+            current_states = epsilon_closure(next_states, transitions)
         
         return not current_states.isdisjoint(final)
-    
+
     if process_nfa(start, final, transitions, string):
-        print("The string is accepted by the NFA.")
+        print("String accepted")
     else:
-        print("The string is not accepted by the NFA.")
+        print("String rejected")
