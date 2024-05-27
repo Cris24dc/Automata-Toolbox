@@ -94,3 +94,41 @@ end"""
 
     with open(file_path, 'w') as file:
         file.write(content)
+
+def pda_template_generator():
+    file_name = input("Enter the name of the config file: ")
+    file_path = f"./cfg/{file_name}.cfg"
+    content = """# The Section names are case-sensitive
+# The content of each section should be between the section name and the word 'end'
+# The Sigma, Gamma, States, Start and Final sections should have one element per line
+# The Start section should have only one element
+# The Delta section should have 5 elements separated by a space
+# The Delta section should have the format: state_from state_to input_char stack_top -> stack_replacement
+# The stack_replacement can be a sequence of characters
+
+[Sigma]
+# Content of Sigma section
+end
+
+[Gamma]
+# Content of Gamma section
+end
+
+[States]
+# Content of States section
+end
+
+[Start]
+# Content of Start section
+end
+
+[Final]
+# Content of Final section
+end
+
+[Delta]
+# Content of Delta section
+end"""
+
+    with open(file_path, 'w') as file:
+        file.write(content)
