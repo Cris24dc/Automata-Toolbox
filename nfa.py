@@ -1,25 +1,25 @@
 import sections_parser
 
 def nfa_check():
-    file_name = input("Please enter a valid filename: ")
+    file_name = input("Please enter a valid filename: ")  # Get file name from user
 
-    content = sections_parser.load_file_content(file_name)
+    content = sections_parser.load_file_content(file_name)  # Load file content
 
     if content is None:
         return None
     
-    sections = sections_parser.get_section_list(content)
+    sections = sections_parser.get_section_list(content)  # Get list of sections
 
     required_sections = ["Sigma", "States", "Start", "Final", "Delta"]
     if sorted(sections) != sorted(required_sections):
-        print("Invalid sections")
+        print("Invalid sections")  # Check for required sections
         return
     
     section_contents = {}
     for section in sections:
         section_contents[section] = sections_parser.get_section_content(content, section)
         if not section_contents[section]:
-            print(f"Section '{section}' is empty")
+            print(f"Section '{section}' is empty")  # Check for empty sections
             return
         
     sigma = section_contents["Sigma"]
@@ -53,18 +53,18 @@ def nfa_check():
                     print(f"State '{state_to}' not found in 'States' section")
                     return
                 
-    print(f"NFA from \"{file_name}\" is valid")
+    print(f"NFA from \"{file_name}\" is valid")  # Confirm NFA validity
 
     return sigma, states, start, final, delta
 
 def nfa_emulator():
-    result = nfa_check()
+    result = nfa_check()  # Perform NFA check
     if result is None:
         return
     
     sigma, states, start, final, delta = result
 
-    string = input("Please enter a string: ")
+    string = input("Please enter a string: ")  # Get input string from user
 
     def parse_delta(delta):
         transitions = {}
@@ -73,7 +73,7 @@ def nfa_emulator():
             state_from, char, state_to = parts[0], parts[1], parts[2]
             if (state_from, char) not in transitions:
                 transitions[(state_from, char)] = []
-            transitions[(state_from, char)].append(state_to)
+            transitions[(state_from, char)].append(state_to)  # Parse transitions
         return transitions
 
     def epsilon_closure(states, transitions):
@@ -87,7 +87,7 @@ def nfa_emulator():
                 for epsilon_state in epsilon_states:
                     if epsilon_state not in closure:
                         closure.add(epsilon_state)
-                        stack.append(epsilon_state)
+                        stack.append(epsilon_state)  # Find epsilon closure states
         
         return closure
 
@@ -103,9 +103,9 @@ def nfa_emulator():
                     next_states.update(transitions[(state, char)])
             current_states = epsilon_closure(next_states, transitions)
         
-        return not current_states.isdisjoint(final)
+        return not current_states.isdisjoint(final)  # Check if any final states are reached
 
     if process_nfa(start, final, transitions, string):
-        print("String accepted")
+        print("String accepted")  # String is accepted if final state is reached
     else:
-        print("String rejected")
+        print("String rejected")  # String is rejected if final state is not reached

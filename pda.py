@@ -1,25 +1,25 @@
 import sections_parser
 
 def pda_check():
-    file_name = input("Please enter a valid filename: ")
+    file_name = input("Please enter a valid filename: ")  # Get file name from user
 
-    content = sections_parser.load_file_content(file_name)
+    content = sections_parser.load_file_content(file_name)  # Load file content
 
     if content is None:
         return None
 
-    sections = sections_parser.get_section_list(content)
+    sections = sections_parser.get_section_list(content)  # Get list of sections
 
     required_sections = ["Sigma", "Gamma", "States", "Start", "Final", "Delta"]
     if sorted(sections) != sorted(required_sections):
-        print("Invalid sections")
+        print("Invalid sections")  # Check for required sections
         return
 
     section_contents = {}
     for section in sections:
         section_contents[section] = sections_parser.get_section_content(content, section)
         if not section_contents[section]:
-            print(f"Section '{section}' is empty")
+            print(f"Section '{section}' is empty")  # Check for empty sections
             return
 
     sigma = section_contents["Sigma"]
@@ -59,19 +59,18 @@ def pda_check():
                         print(f"Stack replacement character '{char}' not found in 'Gamma' section or is not epsilon")
                         return
 
-    print(f"PDA from \"{file_name}\" is valid")
+    print(f"PDA from \"{file_name}\" is valid")  # Confirm PDA validity
 
     return sigma, gamma, states, start, final, delta
 
-
 def pda_emulator():
-    result = pda_check()
+    result = pda_check()  # Perform PDA check
     if result is None:
         return
 
     sigma, gamma, states, start, final, delta = result
 
-    string = input("Please enter a string: ")
+    string = input("Please enter a string: ")  # Get input string from user
 
     current_state = start[0]
     stack = []
@@ -84,14 +83,15 @@ def pda_emulator():
             transitions[state_from] = {}
         if input_char not in transitions[state_from]:
             transitions[state_from][input_char] = []
-        transitions[state_from][input_char].append((state_to, stack_top, stack_replacement))
+        transitions[state_from][input_char].append((state_to, stack_top, stack_replacement))  # Parse transitions
 
     def process_transition(transitions, current_state, string, stack):
-
+        # Base case: check if the string is empty, current state is final, and stack is empty
         if not string and current_state in final and not stack:
             return True
 
         if current_state in transitions:
+            # Process epsilon transitions
             if '$' in transitions[current_state]:
                 for transition in transitions[current_state]['$']:
                     state_to, stack_top, stack_replacement = transition
@@ -107,6 +107,7 @@ def pda_emulator():
                         if process_transition(transitions, state_to, string, new_stack):
                             return True
 
+            # Process non-epsilon transitions
             if string and string[0] in transitions[current_state]:
                 for transition in transitions[current_state][string[0]]:
                     state_to, stack_top, stack_replacement = transition
@@ -124,7 +125,6 @@ def pda_emulator():
         return False
 
     if process_transition(transitions, current_state, string, stack):
-        print("String accepted")
+        print("String accepted")  # String is accepted if final state is reached
     else:
-        print("String rejected")
-        
+        print("String rejected")  # String is rejected if final state is not reached

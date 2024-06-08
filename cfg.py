@@ -2,26 +2,25 @@ import sections_parser
 import random
 
 def cfg_check():
+    file_name = input("Enter the name of the config file: ")  # Get file name from user
 
-    file_name = input("Enter the name of the config file: ")
-
-    content = sections_parser.load_file_content(file_name)
+    content = sections_parser.load_file_content(file_name)  # Load file content
 
     if content == None:
         return None
     
-    sections = sections_parser.get_section_list(content)
+    sections = sections_parser.get_section_list(content)  # Get list of sections
 
     required_sections = ["Variables", "Terminals", "Rules"]
     if sorted(sections) != sorted(required_sections):
-        print("Invalid sections")
+        print("Invalid sections")  # Check for required sections
         return
 
     section_contents = {}
     for section in sections:
         section_contents[section] = sections_parser.get_section_content(content, section)
         if not section_contents[section]:
-            print(f"Section '{section}' is empty")
+            print(f"Section '{section}' is empty")  # Check for empty sections
             return
     
     variables = section_contents["Variables"]
@@ -53,13 +52,11 @@ def cfg_check():
                         print(f"Element '{element}' not found in 'Variables' or 'Terminals' section")
                         return
 
-    print(f"CFG from \"{file_name}\" is valid")
+    print(f"CFG from \"{file_name}\" is valid")  # Confirm CFG validity
     return variables, terminals, rules
 
-
 def cfg_generator():
-    
-    result = cfg_check()
+    result = cfg_check()  # Perform CFG check
     if result is None:
         return
     
@@ -72,7 +69,7 @@ def cfg_generator():
         rule = rule.strip()
         if variable not in rules_dict:
             rules_dict[variable] = []
-        rules_dict[variable].append(rule)
+        rules_dict[variable].append(rule)  # Parse rules
 
     result = starting_variable
 
@@ -80,7 +77,7 @@ def cfg_generator():
         for variable in variables:
             if variable in result:
                 rule = random.choice(rules_dict[variable])
-                result = result.replace(variable, rule, 1)
+                result = result.replace(variable, rule, 1)  # Generate string based on rules
                 break
         
-    print(result.replace("$", ""))
+    print(result.replace("$", ""))  # Print generated string, replacing epsilon transitions

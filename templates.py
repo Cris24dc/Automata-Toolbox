@@ -1,5 +1,5 @@
 def dfa_template_generator():
-    file_name = input("Enter the name of the config file: ")
+    file_name = input("Enter the name of the config file: ")  # Get file name from user
     file_path = f"./cfg/{file_name}.cfg"
     content = """# The Section names are case-sensitive
 # The content of each section should be between the section name and the word 'end'
@@ -29,12 +29,12 @@ end
 [Delta]
 # Content of Delta section
 end"""
-
+    # Write the content to the specified file
     with open(file_path, 'w') as file:
         file.write(content)
 
 def nfa_template_generator():
-    file_name = input("Enter the name of the config file: ")
+    file_name = input("Enter the name of the config file: ")  # Get file name from user
     file_path = f"./cfg/{file_name}.cfg"
     content = """# The Section names are case-sensitive
 # The content of each section should be between the section name and the word 'end'
@@ -64,12 +64,12 @@ end
 [Delta]
 # Content of Delta section
 end"""
-
+    # Write the content to the specified file
     with open(file_path, 'w') as file:
         file.write(content)
 
 def cfg_template_generator():
-    file_name = input("Enter the name of the config file: ")
+    file_name = input("Enter the name of the config file: ")  # Get file name from user
     file_path = f"./cfg/{file_name}.cfg"
     content = """# The Section names are case-sensitive
 # The content of each section should be between the section name and the word 'end'
@@ -91,12 +91,12 @@ end
 [Rules]
 # Content of Rules section
 end"""
-
+    # Write the content to the specified file
     with open(file_path, 'w') as file:
         file.write(content)
 
 def pda_template_generator():
-    file_name = input("Enter the name of the config file: ")
+    file_name = input("Enter the name of the config file: ")  # Get file name from user
     file_path = f"./cfg/{file_name}.cfg"
     content = """# The Section names are case-sensitive
 # The content of each section should be between the section name and the word 'end'
@@ -129,6 +129,6 @@ end
 [Delta]
 # Content of Delta section
 end"""
-
+    # Write the content to the specified file
     with open(file_path, 'w') as file:
         file.write(content)

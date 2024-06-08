@@ -1,26 +1,25 @@
 import sections_parser
 
 def dfa_check():
+    file_name = input("Please enter a valid filename: ")  # Get file name from user
 
-    file_name = input("Please enter a valid filename: ")
-
-    content = sections_parser.load_file_content(file_name)
+    content = sections_parser.load_file_content(file_name)  # Load file content
 
     if content == None:
         return None
     
-    sections = sections_parser.get_section_list(content)
+    sections = sections_parser.get_section_list(content)  # Get list of sections
 
     required_sections = ["Sigma", "States", "Start", "Final", "Delta"]
     if sorted(sections) != sorted(required_sections):
-        print("Invalid sections")
+        print("Invalid sections")  # Check for required sections
         return
 
     section_contents = {}
     for section in sections:
         section_contents[section] = sections_parser.get_section_content(content, section)
         if not section_contents[section]:
-            print(f"Section '{section}' is empty")
+            print(f"Section '{section}' is empty")  # Check for empty sections
             return
     
     sigma = section_contents["Sigma"]
@@ -54,20 +53,18 @@ def dfa_check():
                     print(f"State '{state_to}' not found in 'States' section")
                     return
 
-    print(f"DFA from \"{file_name}\" is valid")
+    print(f"DFA from \"{file_name}\" is valid")  # Confirm DFA validity
 
     return sigma, states, start, final, delta
 
-
 def dfa_emulator():
-
-    result = dfa_check()
+    result = dfa_check()  # Perform DFA check
     if result is None:
         return
 
     sigma, states, start, final, delta = result
 
-    string = input("Please enter a string: ")
+    string = input("Please enter a string: ")  # Get input string from user
 
     current_state = start[0]
     for char in string:
@@ -81,6 +78,6 @@ def dfa_emulator():
                 break
 
     if current_state in final:
-        print("String accepted")
+        print("String accepted")  # String is accepted if in final state
     else:
-        print("String rejected")
+        print("String rejected")  # String is rejected if not in final state
