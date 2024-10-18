@@ -24,7 +24,7 @@ Each automaton type is configurable via text-based configuration files and can b
 
 ## Usage
 
-<img src="./img/ss1.png" width=45%>
+<img src="./img/ss1.png" width=35%>
 
 ### Generating Templates
 
@@ -38,7 +38,7 @@ python3 main.py
 
 Once a template is generated, fill in the required sections in the .cfg file with the appropriate states, symbols, and transitions for your automaton. Each section is clearly labeled, and the format is strict to ensure correct parsing. For example here is a CFG example for matching parentheses.
 
-<img src="./img/ss2.png" width=65%>
+<img src="./img/ss2.png" width=55%>
 
 ### Running Automata
 
