@@ -2,7 +2,7 @@
 
 <img src="./img/Git_LFA.jpg" width=95%>
 
-## Overview
+## Altceva
 
 This project provides a Python-based framework for simulating various types of automata using configuration files. The system is designed to support four types of automata commonly used in computational theory:
 
