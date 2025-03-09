@@ -1,6 +1,6 @@
 # Automata-Toolbox
 
-![Descriere imagine](<![Image](https://github.com/user-attachments/assets/eacd5b56-9a68-467c-9ba9-3e4e73e482de)>)
+![Descriere imagine](https://github.com/Cris24dc/Automata-Toolbox/issues/1#issue-2905387349)
 
 ## Overview
 
