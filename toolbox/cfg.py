@@ -1,15 +1,15 @@
-import sections_parser
+import toolbox.parser as parser
 import random
 
 def cfg_check():
     file_name = input("Enter the name of the config file: ")  # Get file name from user
 
-    content = sections_parser.load_file_content(file_name)  # Load file content
+    content = parser.load_file_content(file_name)  # Load file content
 
     if content == None:
         return None
     
-    sections = sections_parser.get_section_list(content)  # Get list of sections
+    sections = parser.get_section_list(content)  # Get list of sections
 
     required_sections = ["Variables", "Terminals", "Rules"]
     if sorted(sections) != sorted(required_sections):
@@ -18,7 +18,7 @@ def cfg_check():
 
     section_contents = {}
     for section in sections:
-        section_contents[section] = sections_parser.get_section_content(content, section)
+        section_contents[section] = parser.get_section_content(content, section)
         if not section_contents[section]:
             print(f"Section '{section}' is empty")  # Check for empty sections
             return

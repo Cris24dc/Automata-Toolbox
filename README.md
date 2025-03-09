@@ -1,6 +1,6 @@
 # Automata-Toolbox
 
-<img src="./img/Git_LFA.jpg" width=95%>
+![Descriere imagine](<![Image](https://github.com/user-attachments/assets/eacd5b56-9a68-467c-9ba9-3e4e73e482de)>)
 
 ## Overview
 

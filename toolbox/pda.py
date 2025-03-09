@@ -1,14 +1,14 @@
-import sections_parser
+import toolbox.parser as parser
 
 def pda_check():
     file_name = input("Please enter a valid filename: ")  # Get file name from user
 
-    content = sections_parser.load_file_content(file_name)  # Load file content
+    content = parser.load_file_content(file_name)  # Load file content
 
     if content is None:
         return None
 
-    sections = sections_parser.get_section_list(content)  # Get list of sections
+    sections = parser.get_section_list(content)  # Get list of sections
 
     required_sections = ["Sigma", "Gamma", "States", "Start", "Final", "Delta"]
     if sorted(sections) != sorted(required_sections):
@@ -17,7 +17,7 @@ def pda_check():
 
     section_contents = {}
     for section in sections:
-        section_contents[section] = sections_parser.get_section_content(content, section)
+        section_contents[section] = parser.get_section_content(content, section)
         if not section_contents[section]:
             print(f"Section '{section}' is empty")  # Check for empty sections
             return
