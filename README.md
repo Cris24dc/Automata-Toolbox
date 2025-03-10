@@ -1,45 +1,159 @@
-# Automata-Toolbox
-
-![Descriere imagine](<![Image](https://github.com/user-attachments/assets/eacd5b56-9a68-467c-9ba9-3e4e73e482de)>)
+# Automata Toolbox
 
 ## Overview
 
-This project provides a Python-based framework for simulating various types of automata using configuration files. The system is designed to support four types of automata commonly used in computational theory:
+Automata Toolbox is a Python framework designed for simulating various types of automata used in computational theory. It supports the following automata types:
 
-- Deterministic Finite Automata (**DFA**)
-- Non-Deterministic Finite Automata (**NFA**)
-- Pushdown Automata (**PDA**)
-- Context-Free Grammar (**CFG**)
+- **Deterministic Finite Automata (DFA)**
+- **Non-Deterministic Finite Automata (NFA)**
+- **Pushdown Automata (PDA)**
+- **Context-Free Grammar (CFG)**
 
-<br>
+This framework allows users to define and execute automata using structured configuration files or Python classes. It provides utilities for parsing, validation, and simulation of automata, making it an ideal tool for learning and experimentation.
 
-Each automaton type is configurable via text-based configuration files and can be executed or emulated using this framework. The configuration files follow specific formats and structure, which are parsed and validated to ensure proper automaton behavior.
+---
 
-## Key Features
+## Features
 
-- **Automaton Simulation**: The system supports both deterministic and non-deterministic finite automata (DFA/NFA), pushdown automata (PDA), and context-free grammar (CFG) parsing.
-- **Configuration-based**: Automata are defined using structured configuration files, allowing users to easily describe the components and rules of each automaton.
-- **Error Handling**: The framework validates each automaton's configuration and provides meaningful error messages to guide users in correcting invalid inputs.
-- **Modular Design**: The code is organized into reusable modules for parsing configuration files, simulating automata, and managing user interactions.
+✅ **Full Automata Simulation** - Supports DFA, NFA, PDA, and CFG.
+✅ **Structured Configuration** - Automata are defined using `.cfg` configuration files.
+✅ **Python API** - Automata can be created and run programmatically.
+✅ **Command-Line Interface (CLI)** - Automata can be managed directly from the terminal.
+✅ **Extensible and Modular** - Designed to be modified and extended easily.
 
-## Usage
+---
 
-<img src="./img/ss1.png" width=35%>
+## Installation
 
-### Generating Templates
+Automata Toolbox requires **Python 3.7+**. Install it via pip:
 
-To create a template configuration file for an automaton, run the program and select the option for generating a template. The file will be created in the /cfg/ directory.
+```bash
+pip install automata_toolbox
+```
+
+Alternatively, you can install it from source:
+
+```bash
+git clone https://github.com/Cris24dc/Automata-Toolbox.git
+cd Automata-Toolbox
+pip install -e .
+```
+
+---
+
+## CLI Usage
+
+### **Generate an Automaton Template**
+
+```bash
+automata generate dfa config/my_dfa.cfg
+```
+
+Supported automaton types: `dfa`, `nfa`, `pda`, `cfg`.
+
+### **Run a DFA on an Input String**
+
+```bash
+python3 -m toolbox.main config/my_dfa.cfg abba
+```
+
+---
+
+## Using the Python API
+
+### **Creating and Running a DFA**
+
+```python
+from toolbox import DFA
+
+dfa = DFA("config/example.cfg")
+if dfa.is_valid():
+    print("DFA is valid")
+    print(dfa.run("abba"))
+```
+
+### **Using an NFA**
+
+```python
+from toolbox import NFA
+
+nfa = NFA("config/example_nfa.cfg")
+if nfa.is_valid():
+    print("NFA is valid")
+    print(nfa.run("abba"))
+```
+
+---
+
+## Configuration Files
+
+Each automaton type requires a `.cfg` file structured as follows:
+
+### **DFA Configuration Example**
 
 ```
-python3 main.py
+[Sigma]
+a
+b
+end
+
+[States]
+q0
+q1
+end
+
+[Start]
+q0
+end
+
+[Final]
+q1
+end
+
+[Delta]
+q0 a q1
+q1 b q0
+end
 ```
 
-### Configuring Automata
+### **CFG Configuration Example**
 
-Once a template is generated, fill in the required sections in the .cfg file with the appropriate states, symbols, and transitions for your automaton. Each section is clearly labeled, and the format is strict to ensure correct parsing. For example here is a CFG example for matching parentheses.
+```
+[Variables]
+S
+end
 
-<img src="./img/ss2.png" width=55%>
+[Terminals]
+a
+b
+end
 
-### Running Automata
+[Rules]
+S -> aSb
+S -> $
+end
+```
 
-You can emulate an automaton by choosing the corresponding option from the main menu. The system will validate the configuration file and, if valid, run the automaton on a provided input string.
+---
+
+## Development and Contribution
+
+To contribute:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature-xyz`.
+3. Commit changes: `git commit -m "Added feature XYZ"`.
+4. Push: `git push origin feature-xyz`.
+5. Submit a pull request.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
+
+---
+
+## Contact
+
+For any questions or contributions, reach out at **cristianandrei752@gmail.com** or visit the GitHub repository: [Automata Toolbox](https://github.com/Cris24dc/Automata-Toolbox.git).
