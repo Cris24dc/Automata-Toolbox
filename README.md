@@ -31,7 +31,7 @@ This framework enables users to **define and execute automata** using structured
 
 **Requires Python 3.7+**. Install via pip:
 ```bash
-pip install automata_toolbox
+pip install automata-toolbox
 ```
 Or install from source:
 ```bash
