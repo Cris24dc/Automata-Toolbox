@@ -23,17 +23,20 @@ This framework enables users to **define and execute automata** using structured
 ✅ **Structured Configuration** - Define automata using `.cfg` configuration files.  
 ✅ **Python API** - Programmatically create and run automata.  
 ✅ **Command-Line Interface (CLI)** - Manage automata directly from the terminal.  
-✅ **Modular & Extensible** - Easily customizable and extendable.  
+✅ **Modular & Extensible** - Easily customizable and extendable.
 
 ---
 
 ## 📥 Installation
 
 **Requires Python 3.7+**. Install via pip:
+
 ```bash
 pip install automata-toolbox
 ```
+
 Or install from source:
+
 ```bash
 git clone https://github.com/Cris24dc/Automata-Toolbox.git
 cd Automata-Toolbox
@@ -45,12 +48,15 @@ pip install -e .
 ## 🖥 CLI Usage
 
 ### **Generate an Automaton Template**
+
 ```bash
 automata generate dfa my_dfa
 ```
+
 Supported types: `dfa`, `nfa`, `pda`, `cfg`.
 
 ### **Run a DFA on an Input String**
+
 ```bash
 python3 -m toolbox.main config/my_dfa.cfg abba
 ```
@@ -60,6 +66,7 @@ python3 -m toolbox.main config/my_dfa.cfg abba
 ## Using the Python API
 
 ### **Creating and Running a DFA**
+
 ```python
 from toolbox import DFA
 
@@ -70,6 +77,7 @@ if dfa.is_valid():
 ```
 
 ### **Using an NFA**
+
 ```python
 from toolbox import NFA
 
@@ -82,9 +90,11 @@ if nfa.is_valid():
 ---
 
 ## ⚙️ Configuration Files
+
 Each automaton type uses a `.cfg` file structured as follows:
 
 ### 📌 **DFA Configuration Example**
+
 ```
 [Sigma]
 a
@@ -111,6 +121,7 @@ end
 ```
 
 ### 📌 **CFG Configuration Example**
+
 ```
 [Variables]
 S
@@ -130,7 +141,9 @@ end
 ---
 
 ## 🔧 Development & Contribution
+
 Want to contribute? Follow these steps:
+
 1. **Fork the repository**
 2. **Create a new branch**: `git checkout -b feature-xyz`
 3. **Commit changes**: `git commit -m "Added feature XYZ"`
@@ -146,6 +159,7 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for d
 ---
 
 ## 📬 Contact
+
 For inquiries or contributions, reach out via **cristianandrei752@gmail.com** or visit the **[GitHub Repository](https://github.com/Cris24dc/Automata-Toolbox.git)**.
 
 🔗 Also available on **[PyPI](https://pypi.org/project/automata-toolbox/)**
