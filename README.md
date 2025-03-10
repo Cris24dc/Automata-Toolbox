@@ -6,10 +6,10 @@
 
 **Automata Toolbox** is a powerful Python framework for simulating various types of automata in computational theory. It supports the following automaton types:
 
-- 🤖 **Deterministic Finite Automata (DFA)**
-- 🔀 **Non-Deterministic Finite Automata (NFA)**
-- 📚 **Pushdown Automata (PDA)**
-- 🎭 **Context-Free Grammar (CFG)**
+- **Deterministic Finite Automata (DFA)**
+- **Non-Deterministic Finite Automata (NFA)**
+- **Pushdown Automata (PDA)**
+- **Context-Free Grammar (CFG)**
 
 This framework enables users to **define and execute automata** using structured configuration files or Python classes, offering utilities for **parsing, validation, and execution** of automata.
 
@@ -44,38 +44,38 @@ pip install -e .
 
 ## 🖥 CLI Usage
 
-### 🔧 **Generate an Automaton Template**
+### **Generate an Automaton Template**
 ```bash
 automata generate dfa my_dfa
 ```
 Supported types: `dfa`, `nfa`, `pda`, `cfg`.
 
-### 🏃 **Run a DFA on an Input String**
+### **Run a DFA on an Input String**
 ```bash
 python3 -m toolbox.main config/my_dfa.cfg abba
 ```
 
 ---
 
-## 🐍 Using the Python API
+## Using the Python API
 
-### 🎯 **Creating and Running a DFA**
+### **Creating and Running a DFA**
 ```python
 from toolbox import DFA
 
 dfa = DFA("config/example.cfg")
 if dfa.is_valid():
-    print("✅ DFA is valid")
+    print("DFA is valid")
     print("Result:", dfa.run("abba"))
 ```
 
-### 🔄 **Using an NFA**
+### **Using an NFA**
 ```python
 from toolbox import NFA
 
 nfa = NFA("config/example_nfa.cfg")
 if nfa.is_valid():
-    print("✅ NFA is valid")
+    print("NFA is valid")
     print("Result:", nfa.run("abba"))
 ```
 
@@ -131,11 +131,11 @@ end
 
 ## 🔧 Development & Contribution
 Want to contribute? Follow these steps:
-1. 🍴 **Fork the repository**
-2. 🌿 **Create a new branch**: `git checkout -b feature-xyz`
-3. 💾 **Commit changes**: `git commit -m "Added feature XYZ"`
-4. 🚀 **Push to GitHub**: `git push origin feature-xyz`
-5. 🔄 **Submit a pull request**
+1. **Fork the repository**
+2. **Create a new branch**: `git checkout -b feature-xyz`
+3. **Commit changes**: `git commit -m "Added feature XYZ"`
+4. **Push to GitHub**: `git push origin feature-xyz`
+5. **Submit a pull request**
 
 ---
 
@@ -148,4 +148,4 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for d
 ## 📬 Contact
 For inquiries or contributions, reach out via **cristianandrei752@gmail.com** or visit the **[GitHub Repository](https://github.com/Cris24dc/Automata-Toolbox.git)**.
 
-🔗 Also available on **[PyPI](https://pypi.org/project/automata-toolbox/)** 🚀
+🔗 Also available on **[PyPI](https://pypi.org/project/automata-toolbox/)**
