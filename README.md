@@ -55,12 +55,6 @@ automata generate dfa my_dfa
 
 Supported types: `dfa`, `nfa`, `pda`, `cfg`.
 
-### **Run a DFA on an Input String**
-
-```bash
-python3 -m toolbox.main config/my_dfa.cfg abba
-```
-
 ---
 
 ## Using the Python API
